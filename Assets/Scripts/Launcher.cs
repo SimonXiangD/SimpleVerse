@@ -51,7 +51,6 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         loadingScreen.SetActive(true);
         loadingText.text = "Connecting To Network...";
-
         if (!PhotonNetwork.IsConnected)
         {
             PhotonNetwork.ConnectUsingSettings();
@@ -116,13 +115,14 @@ public class Launcher : MonoBehaviourPunCallbacks
         createRoomScreen.SetActive(true);
     }
 
-    public void CreateRoom()
+    public void CreateRoom(string name = "Init Room")
     {
-        if(!string.IsNullOrEmpty(roomNameInput.text))
+        if(name != "" ||  !string.IsNullOrEmpty(roomNameInput.text))
         {
             RoomOptions options = new RoomOptions();
             options.MaxPlayers = 8;
 
+            string roomName = !string.IsNullOrEmpty(roomNameInput.text) ? roomNameInput.text : name;
             PhotonNetwork.CreateRoom(roomNameInput.text, options);
 
             CloseMenus();
@@ -212,6 +212,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void OpenRoomBrowser()
     {
         CloseMenus();
+        CreateRoom();
         roomBrowserScreen.SetActive(true);
     }
 
