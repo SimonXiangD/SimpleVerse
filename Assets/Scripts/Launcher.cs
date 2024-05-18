@@ -115,8 +115,9 @@ public class Launcher : MonoBehaviourPunCallbacks
         createRoomScreen.SetActive(true);
     }
 
-    public void CreateRoom(string name = "Init Room")
+    public void CreateRoom()
     {
+        string name = "Init Room";
         if(name != "" ||  !string.IsNullOrEmpty(roomNameInput.text))
         {
             RoomOptions options = new RoomOptions();
@@ -212,7 +213,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void OpenRoomBrowser()
     {
         CloseMenus();
-        CreateRoom();
         roomBrowserScreen.SetActive(true);
     }
 

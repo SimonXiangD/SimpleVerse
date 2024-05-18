@@ -498,9 +498,9 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public void UpdateTimerDisplay()
     {
         
-        var timeToDisplay = System.TimeSpan.FromSeconds(currentMatchTime);
+        // var timeToDisplay = System.TimeSpan.FromSeconds(currentMatchTime);
 
-        UIController.instance.timerText.text = timeToDisplay.Minutes.ToString("00") + ":" + timeToDisplay.Seconds.ToString("00");
+        // UIController.instance.timerText.text = timeToDisplay.Minutes.ToString("00") + ":" + timeToDisplay.Seconds.ToString("00");
     }
 
     public void TimerSend()
@@ -522,7 +522,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
         UpdateTimerDisplay();
 
-        UIController.instance.timerText.gameObject.SetActive(true);
+        // UIController.instance.timerText.gameObject.SetActive(true);
     }
 }
 

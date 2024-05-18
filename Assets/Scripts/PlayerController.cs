@@ -275,6 +275,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private void Shoot()
     {
+        return;
         Ray ray = cam.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
         ray.origin = cam.transform.position;
 
