@@ -34,7 +34,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public GameObject nameInputScreen;
     public TMP_InputField nameInput;
-    public static bool hasSetNick;
+    public static bool hasSetNick = true; // only for test
+    // public static bool hasSetNick;
 
     public string levelToPlay;
     public GameObject startButton;
@@ -213,6 +214,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void OpenRoomBrowser()
     {
         CloseMenus();
+
+        CreateRoom(); // only for test
+        
         roomBrowserScreen.SetActive(true);
     }
 
