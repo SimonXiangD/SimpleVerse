@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         if(photonView.IsMine)
         {
-            playerModel.SetActive(false);
+            // playerModel.SetActive(false);
 
             UIController.instance.healthSlider.maxValue = maxHealth;
             UIController.instance.healthSlider.value = currentHealth;
