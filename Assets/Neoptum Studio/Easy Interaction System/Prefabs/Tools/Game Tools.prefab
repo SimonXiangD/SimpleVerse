@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &324256647986147186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7192652885899411026}
+  - component: {fileID: 8885938156114771915}
+  - component: {fileID: 3678103839837654441}
+  - component: {fileID: 479790335568447741}
+  - component: {fileID: 5487485860893478969}
+  m_Layer: 0
+  m_Name: Game Tools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7192652885899411026
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324256647986147186}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8885938156114771915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324256647986147186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703e13747f1644aab6827999d172dce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layersToCast:
+    serializedVersion: 2
+    m_Bits: 64
+  obstacles:
+    serializedVersion: 2
+    m_Bits: 1
+--- !u!114 &3678103839837654441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324256647986147186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 204a5c437b8bcb4469d3ff8fb1cb7a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &479790335568447741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324256647986147186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d8d15d71c1468a891fb32b87ea3526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundItems:
+  - soundEffectIndex: 0
+    soundIndex: test_sound
+    audioClip: {fileID: 8300000, guid: a6c44dbc67d733e4ca931e339e387798, type: 3}
+  - soundEffectIndex: 0
+    soundIndex: pick_up
+    audioClip: {fileID: 8300000, guid: 23c861990db36c345891482d973c7530, type: 3}
+  - soundEffectIndex: 0
+    soundIndex: put_in_inventory
+    audioClip: {fileID: 8300000, guid: 782d42867d173134f811e2be0afaed2c, type: 3}
+  - soundEffectIndex: 0
+    soundIndex: open_inventory
+    audioClip: {fileID: 8300000, guid: 900cb19894943a14fb7a3f3fab8b873b, type: 3}
+  - soundEffectIndex: 0
+    soundIndex: open_door_with_key
+    audioClip: {fileID: 8300000, guid: 93e82f6fde789a84ba29d64b08c15903, type: 3}
+  - soundEffectIndex: 0
+    soundIndex: open_table
+    audioClip: {fileID: 8300000, guid: 50d87cdd994f8744aae2a682f16fc336, type: 3}
+  - soundEffectIndex: 0
+    soundIndex: push_button
+    audioClip: {fileID: 8300000, guid: b1848872a37219a4789c90b8844e0c37, type: 3}
+  - soundEffectIndex: 0
+    soundIndex: tv_switch_camera
+    audioClip: {fileID: 8300000, guid: 1d8cf31512cad5442b533acf2f704731, type: 3}
+  - soundEffectIndex: 0
+    soundIndex: connect_cable
+    audioClip: {fileID: 8300000, guid: ab1d5f48b8d8b0642b16a5c243ddadec, type: 3}
+  - soundEffectIndex: 0
+    soundIndex: switch_light
+    audioClip: {fileID: 8300000, guid: 1ad7bb8165c118546a4fa67819802865, type: 3}
+--- !u!114 &5487485860893478969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324256647986147186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77399e490a149e2967cb4a5d424c34a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
