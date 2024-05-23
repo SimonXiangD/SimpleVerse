@@ -67,7 +67,7 @@ namespace QuickOutline
 
         [SerializeField] private Color outlineColor = Color.white;
 
-        [SerializeField, Range(0f, 10f)] private float outlineWidth = 2f;
+        [SerializeField, Range(0f, 1000f)] private float outlineWidth = 2f;
 
         [Header("Optional")]
         [SerializeField, Tooltip(
