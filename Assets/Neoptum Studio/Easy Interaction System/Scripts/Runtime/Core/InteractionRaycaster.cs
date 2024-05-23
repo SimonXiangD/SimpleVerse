@@ -66,7 +66,7 @@ namespace EIS.Runtime.Core
             }
 
             Ray ray = GetRay();
-            bool rayCast = Physics.Raycast(ray, out var hit, 2.5f, layersToCast | obstacles) &&
+            bool rayCast = Physics.Raycast(ray, out var hit, 10f, layersToCast | obstacles) &&
                            layersToCast.ContainsLayer(hit.collider.gameObject.layer);
 
             if (rayCast)
@@ -77,7 +77,7 @@ namespace EIS.Runtime.Core
             {
 #if UNITY_EDITOR
                 Debug.DrawRay(ray.origin, ray.direction, Color.green, Time.deltaTime * 10);
-                Physics.Raycast(ray, out var hit2, 2.5f, layersToCast);
+                Physics.Raycast(ray, out var hit2, 10f, layersToCast);
 #endif
             }
 

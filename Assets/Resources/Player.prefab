@@ -766,17 +766,7 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
-  bulletImpact: {fileID: 5134447405508016154, guid: bb82bd348312b0e47b59bd7dd0fe8dcc, type: 3}
   muzzleDisplayTime: 0.016666668
-  maxHeat: 10
-  coolRate: 4
-  overheatCoolRate: 5
-  allGuns:
-  - {fileID: 7338187917824394133}
-  - {fileID: 7338187918450595720}
-  - {fileID: 7338187917518410134}
-  playerHitImpact: {fileID: 5134447405508016154, guid: 1af84a5069c65af44beee36fad8ef656, type: 3}
-  maxHealth: 100
   anim: {fileID: 5605021201967795924}
   playerModel: {fileID: 5605021201982666959}
   modelGunPoint: {fileID: 8602838754413947822}

@@ -26,23 +26,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
     private bool isGrounded;
     public LayerMask groundLayers;
 
-    public GameObject bulletImpact;
-    //public float timeBetweenShots = .1f;
-    private float shotCounter;
+
     public float muzzleDisplayTime;
     private float muzzleCounter;
 
-    public float maxHeat = 10f, /* heatPerShot = 1f, */ coolRate = 4f, overheatCoolRate = 5f;
-    private float heatCounter;
-    private bool overHeated;
-
-    public Gun[] allGuns;
-    private int selectedGun;
-
-    public GameObject playerHitImpact;
-
-    public int maxHealth = 100;
-    private int currentHealth;
 
     public Animator anim;
     public GameObject playerModel;
@@ -62,29 +49,16 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         cam = Camera.main;
 
-        UIController.instance.weaponTempSlider.maxValue = maxHeat;
 
         //SwitchGun();
-        photonView.RPC("SetGun", RpcTarget.All, selectedGun);
+        // photonView.RPC("SetGun", RpcTarget.All, selectedGun);
 
-        currentHealth = maxHealth;
 
         //Transform newTrans = SpawnManager.instance.GetSpawnPoint();
         //transform.position = newTrans.position;
         //transform.rotation = newTrans.rotation;
 
-        if(photonView.IsMine)
-        {
-            // playerModel.SetActive(false);
-
-            UIController.instance.healthSlider.maxValue = maxHealth;
-            UIController.instance.healthSlider.value = currentHealth;
-        } else
-        {
-            gunHolder.parent = modelGunPoint;
-            gunHolder.localPosition = Vector3.zero;
-            gunHolder.localRotation = Quaternion.identity;
-        }
+        
 
         playerModel.GetComponent<Renderer>().material = allSkins[photonView.Owner.ActorNumber % allSkins.Length];
     }
@@ -160,102 +134,21 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
             charCon.Move(movement * Time.deltaTime);
 
-            if (allGuns[selectedGun].muzzleFlash.activeInHierarchy)
-            {
-                muzzleCounter -= Time.deltaTime;
-
-                if (muzzleCounter <= 0)
-                {
-                    allGuns[selectedGun].muzzleFlash.SetActive(false);
-                }
-            }
-
-            if (!overHeated)
-            {
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Shoot();
-                }
-
-                if (Input.GetMouseButton(0) && allGuns[selectedGun].isAutomatic)
-                {
-                    shotCounter -= Time.deltaTime;
-
-                    if (shotCounter <= 0)
-                    {
-                        Shoot();
-                    }
-                }
-
-                heatCounter -= coolRate * Time.deltaTime;
-            }
-            else
-            {
-                heatCounter -= overheatCoolRate * Time.deltaTime;
-                if (heatCounter <= 0)
-                {
-                    overHeated = false;
-
-                    UIController.instance.overheatedMessage.gameObject.SetActive(false);
-                }
-            }
-
-            if (heatCounter < 0)
-            {
-                heatCounter = 0f;
-            }
-            UIController.instance.weaponTempSlider.value = heatCounter;
-
-
-            if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
-            {
-                selectedGun++;
-
-                if (selectedGun >= allGuns.Length)
-                {
-                    selectedGun = 0;
-                }
-                //SwitchGun();
-                photonView.RPC("SetGun", RpcTarget.All, selectedGun);
-
-            }
-            else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
-            {
-                selectedGun--;
-
-                if (selectedGun < 0)
-                {
-                    selectedGun = allGuns.Length - 1;
-                }
-                //SwitchGun();
-                photonView.RPC("SetGun", RpcTarget.All, selectedGun);
-            }
-
-            for (int i = 0; i < allGuns.Length; i++)
-            {
-                if (Input.GetKeyDown((i + 1).ToString()))
-                {
-                    selectedGun = i;
-                    //SwitchGun();
-                    photonView.RPC("SetGun", RpcTarget.All, selectedGun);
-                }
-            }
-
+            
             anim.SetBool("grounded", isGrounded);
             anim.SetFloat("speed", moveDir.magnitude);
 
 
 
-            if(Input.GetMouseButton(1))
-            {
-                cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, allGuns[selectedGun].adsZoom, adsSpeed * Time.deltaTime);
-                gunHolder.position = Vector3.Lerp(gunHolder.position, adsInPoint.position, adsSpeed * Time.deltaTime);
-            } else
-            {
-                cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60f, adsSpeed * Time.deltaTime);
-                gunHolder.position = Vector3.Lerp(gunHolder.position, adsOutPoint.position, adsSpeed * Time.deltaTime);
-            }
+            // if(Input.GetMouseButton(1))
+            // {
+            //     cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, allGuns[selectedGun].adsZoom, adsSpeed * Time.deltaTime);
+            //     gunHolder.position = Vector3.Lerp(gunHolder.position, adsInPoint.position, adsSpeed * Time.deltaTime);
+            // } else
+            // {
+            //     cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60f, adsSpeed * Time.deltaTime);
+            //     gunHolder.position = Vector3.Lerp(gunHolder.position, adsOutPoint.position, adsSpeed * Time.deltaTime);
+            // }
 
 
 
@@ -276,77 +169,77 @@ public class PlayerController : MonoBehaviourPunCallbacks
     private void Shoot()
     {
         return;
-        Ray ray = cam.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
-        ray.origin = cam.transform.position;
+        // Ray ray = cam.ViewportPointToRay(new Vector3(.5f, .5f, 0f));
+        // ray.origin = cam.transform.position;
 
-        if(Physics.Raycast(ray, out RaycastHit hit))
-        {
-            //Debug.Log("We hit " + hit.collider.gameObject.name);
+        // if(Physics.Raycast(ray, out RaycastHit hit))
+        // {
+        //     //Debug.Log("We hit " + hit.collider.gameObject.name);
 
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                Debug.Log("Hit " + hit.collider.gameObject.GetPhotonView().Owner.NickName);
+        //     if (hit.collider.gameObject.tag == "Player")
+        //     {
+        //         Debug.Log("Hit " + hit.collider.gameObject.GetPhotonView().Owner.NickName);
 
-                PhotonNetwork.Instantiate(playerHitImpact.name, hit.point, Quaternion.identity);
+        //         PhotonNetwork.Instantiate(playerHitImpact.name, hit.point, Quaternion.identity);
 
-                hit.collider.gameObject.GetPhotonView().RPC("DealDamage", RpcTarget.All, photonView.Owner.NickName, allGuns[selectedGun].shotDamage, PhotonNetwork.LocalPlayer.ActorNumber);
-            }
-            else
-            {
+        //         hit.collider.gameObject.GetPhotonView().RPC("DealDamage", RpcTarget.All, photonView.Owner.NickName, allGuns[selectedGun].shotDamage, PhotonNetwork.LocalPlayer.ActorNumber);
+        //     }
+        //     else
+        //     {
 
-                GameObject bulletImpactObject = Instantiate(bulletImpact, hit.point + (hit.normal * .002f), Quaternion.LookRotation(hit.normal, Vector3.up));
+        //         GameObject bulletImpactObject = Instantiate(bulletImpact, hit.point + (hit.normal * .002f), Quaternion.LookRotation(hit.normal, Vector3.up));
 
-                Destroy(bulletImpactObject, 10f);
-            }
-        }
+        //         Destroy(bulletImpactObject, 10f);
+        //     }
+        // }
 
-        shotCounter = allGuns[selectedGun].timeBetweenShots;
+        // shotCounter = allGuns[selectedGun].timeBetweenShots;
 
 
-        heatCounter += allGuns[selectedGun].heatPerShot;
-        if(heatCounter >= maxHeat)
-        {
-            heatCounter = maxHeat;
+        // heatCounter += allGuns[selectedGun].heatPerShot;
+        // if(heatCounter >= maxHeat)
+        // {
+        //     heatCounter = maxHeat;
 
-            overHeated = true;
+        //     overHeated = true;
 
-            UIController.instance.overheatedMessage.gameObject.SetActive(true);
-        }
+        //     UIController.instance.overheatedMessage.gameObject.SetActive(true);
+        // }
 
-        allGuns[selectedGun].muzzleFlash.SetActive(true);
-        muzzleCounter = muzzleDisplayTime;
+        // allGuns[selectedGun].muzzleFlash.SetActive(true);
+        // muzzleCounter = muzzleDisplayTime;
 
-        allGuns[selectedGun].shotSound.Stop();
-        allGuns[selectedGun].shotSound.Play();
+        // allGuns[selectedGun].shotSound.Stop();
+        // allGuns[selectedGun].shotSound.Play();
     }
 
-    [PunRPC]
-    public void DealDamage(string damager, int damageAmount, int actor)
-    {
-        TakeDamage(damager, damageAmount, actor);
-    }
+    // [PunRPC]
+    // public void DealDamage(string damager, int damageAmount, int actor)
+    // {
+    //     TakeDamage(damager, damageAmount, actor);
+    // }
 
-    public void TakeDamage(string damager, int damageAmount, int actor)
-    {
-        if (photonView.IsMine)
-        {
-            //Debug.Log(photonView.Owner.NickName + " has been hit by " + damager);
+    // public void TakeDamage(string damager, int damageAmount, int actor)
+    // {
+    //     if (photonView.IsMine)
+    //     {
+    //         //Debug.Log(photonView.Owner.NickName + " has been hit by " + damager);
 
-            currentHealth -= damageAmount;
+    //         currentHealth -= damageAmount;
 
-            if (currentHealth <= 0)
-            {
-                currentHealth = 0;
+    //         if (currentHealth <= 0)
+    //         {
+    //             currentHealth = 0;
 
-                PlayerSpawner.instance.Die(damager);
+    //             PlayerSpawner.instance.Die(damager);
 
-                MatchManager.instance.UpdateStatsSend(actor, 0, 1);
-            }
+    //             MatchManager.instance.UpdateStatsSend(actor, 0, 1);
+    //         }
 
 
-            UIController.instance.healthSlider.value = currentHealth;
-        }
-    }
+    //         UIController.instance.healthSlider.value = currentHealth;
+    //     }
+    // }
 
     private void LateUpdate()
     {
@@ -364,25 +257,25 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
     }
 
-    void SwitchGun()
-    {
-        foreach(Gun gun in allGuns)
-        {
-            gun.gameObject.SetActive(false);
-        }
+    // void SwitchGun()
+    // {
+    //     foreach(Gun gun in allGuns)
+    //     {
+    //         gun.gameObject.SetActive(false);
+    //     }
 
-        allGuns[selectedGun].gameObject.SetActive(true);
+    //     allGuns[selectedGun].gameObject.SetActive(true);
 
-        allGuns[selectedGun].muzzleFlash.SetActive(false);
-    }
+    //     allGuns[selectedGun].muzzleFlash.SetActive(false);
+    // }
 
-    [PunRPC]
-    public void SetGun(int gunToSwitchTo)
-    {
-        if(gunToSwitchTo < allGuns.Length)
-        {
-            selectedGun = gunToSwitchTo;
-            SwitchGun();
-        }
-    }
+    // [PunRPC]
+    // public void SetGun(int gunToSwitchTo)
+    // {
+    //     if(gunToSwitchTo < allGuns.Length)
+    //     {
+    //         selectedGun = gunToSwitchTo;
+    //         SwitchGun();
+    //     }
+    // }
 }
