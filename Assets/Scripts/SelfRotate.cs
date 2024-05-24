@@ -6,7 +6,7 @@ public class SelfRotate : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public float speed;
+    public float speed = 50;
 
     void Start()
     {
