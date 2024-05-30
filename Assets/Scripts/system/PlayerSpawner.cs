@@ -30,6 +30,7 @@ public class PlayerSpawner : MonoBehaviour
 
     public void SpawnPlayer()
     {
+        Debug.Log("spw...");
         Transform spawnPoint = SpawnManager.instance.GetSpawnPoint();
 
         player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
@@ -41,9 +42,9 @@ public class PlayerSpawner : MonoBehaviour
 
         // UIController.instance.deathText.text = "You were killed by " + damager;
 
-        //PhotonNetwork.Destroy(player);
+        PhotonNetwork.Destroy(player);
 
-        //SpawnPlayer();
+        SpawnPlayer();
 
         MatchManager.instance.UpdateStatsSend(PhotonNetwork.LocalPlayer.ActorNumber, 1, 1);
 

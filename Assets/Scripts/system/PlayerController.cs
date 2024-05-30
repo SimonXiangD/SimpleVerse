@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-
+            
             mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")) * mouseSensitivity;
 
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + mouseInput.x, transform.rotation.eulerAngles.z);
@@ -152,17 +152,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else if (Cursor.lockState == CursorLockMode.None)
-            {
-                if (Input.GetMouseButtonDown(0) && !UIController.instance.optionsScreen.activeInHierarchy)
-                {
-                    Cursor.lockState = CursorLockMode.Locked;
-                }
-            }
+            // if (Input.GetKeyDown(KeyCode.Escape))
+            // {
+            //     Cursor.lockState = CursorLockMode.None;
+                
+            // }
+            // else if (Cursor.lockState == CursorLockMode.None)
+            // {
+            //     if (Input.GetMouseButtonDown(0) && UIController.instance.curState == "")
+            //     {
+            //         Cursor.lockState = CursorLockMode.Locked;
+            //     }
+            // }
         }
     }
 

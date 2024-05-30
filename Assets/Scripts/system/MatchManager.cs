@@ -59,7 +59,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
             state = GameState.Playing;
 
-            SetupTimer();
+            // SetupTimer();
 
             if(!PhotonNetwork.IsMasterClient)
             {
@@ -99,7 +99,6 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
                     StateCheck();
                 }
 
-                UpdateTimerDisplay();
 
                 sendTimer -= Time.deltaTime;
                 if(sendTimer <= 0)
@@ -471,8 +470,8 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void NextMatchReceive()
     {
-        return;
-        // state = GameState.Playing;
+        // return;
+        state = GameState.Playing;
 
         // UIController.instance.endScreen.SetActive(false);
         // UIController.instance.leaderboard.SetActive(false);
@@ -483,30 +482,14 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
         //     player.deaths = 0;
         // }
 
-        // UpdateStatsDisplay();
+        UpdateStatsDisplay();
 
-        // PlayerSpawner.instance.SpawnPlayer();
+        PlayerSpawner.instance.SpawnPlayer();
 
         // SetupTimer();
     }
 
-    public void SetupTimer()
-    {
-        if(matchLength > 0)
-        {
-            currentMatchTime = matchLength;
-            UpdateTimerDisplay();
-        }
-    }
-
-    public void UpdateTimerDisplay()
-    {
-        
-        // var timeToDisplay = System.TimeSpan.FromSeconds(currentMatchTime);
-
-        // UIController.instance.timerText.text = timeToDisplay.Minutes.ToString("00") + ":" + timeToDisplay.Seconds.ToString("00");
-    }
-
+    
     public void TimerSend()
     {
         object[] package = new object[] { (int)currentMatchTime, state };
@@ -524,7 +507,7 @@ public class MatchManager : MonoBehaviourPunCallbacks, IOnEventCallback
         currentMatchTime = (int)dataReceived[0];
         state = (GameState)dataReceived[1];
 
-        UpdateTimerDisplay();
+        // UpdateTimerDisplay();
 
         // UIController.instance.timerText.gameObject.SetActive(true);
     }

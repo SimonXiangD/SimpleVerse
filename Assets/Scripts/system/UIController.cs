@@ -60,11 +60,19 @@ public class UIController : MonoBehaviour
             }
         }
 
-        if (optionsScreen.activeInHierarchy && Cursor.lockState != CursorLockMode.None)
-        {
+        if(curState != "") {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+        else {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        // if (optionsScreen.activeInHierarchy && Cursor.lockState != CursorLockMode.None)
+        // {
+        //     Cursor.lockState = CursorLockMode.None;
+        //     Cursor.visible = true;
+        // }
     }
 
     public void ShowHideOptions()
@@ -72,18 +80,31 @@ public class UIController : MonoBehaviour
         if(!optionsScreen.activeInHierarchy)
         {
             optionsScreen.SetActive(true);
+
             curState = "options";
         } else
         {
             optionsScreen.SetActive(false);
             curState = "";
+            // Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
     public void showCustomScreen(GameObject customPanel) {
+        if(curState == "custom") {
+            customScreen.SetActive(false);
+        }
         customScreen = customPanel;
         customScreen.SetActive(true);
         curState = "custom";
+    }
+
+    public void openExternalLink(string link = "") {
+        
+        if(link == "") {
+            link = "https://github.com/Rising-Stars-by-Sunshine/stats201-Final_Project-Xintong";
+        }
+        Application.OpenURL(link);
     }
 
     public bool canInteract() {
